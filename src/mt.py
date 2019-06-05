@@ -25,39 +25,56 @@ class TM(object):
 
     def write_string(self):
         self.cinta = []
+        self.cinta.append(self.tm['Blanco'])
+        self.cinta.append(self.tm['Blanco'])
         
         for sym in self.string:
             self.cinta.append(sym)
             
-        self.cinta.append('_')
-        self.cinta.append('_')
+        self.cinta.append(self.tm['Blanco'])
+        self.cinta.append(self.tm['Blanco'])
         self.trans = self.tm['Transiciones']
         self.q = self.tm['Inicial']
-        self.first_sym = self.cinta[0]
+        self.first_sym = self.cinta[2]
         self.l = []
         self.l1 = []
+        self.a = self.string[1:]
         self.p_string = ""
+        self.i = 2
         self.l1.append(self.q)
         
-        for sym in self.cinta:
+        for sym in self.string:
             self.l1.append(sym)
             
         self.l.append(self.l1)
-        
 
+        
     def read_t(self):
         self.l1 = []
+        self.i += 1
+        print(self.l)
         
         for t in self.trans:
             
             if(self.q == t[0] and self.first_sym == t[1]):
                 self.q = t[2]
-                self.p_string.append(self.first_sym)
-                self.first_sym = t[3]
+                self.first_sym = self.cinta[self.i]
+                self.p_string += t[3]
                 
+
                 if(t[4] == 'R'):
+                    
                     for sym in self.p_string:
                         self.l1.append(sym)
+
+                    self.l1.append(self.q)
+
+                    for sym in self.a:
+                        self.l1.append(sym)
+
+                    self.l.append(self.l1)
+                    self.a = self.a[1:]
+                    self.read_t()
                     
 
 if __name__ == '__main__':
