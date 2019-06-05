@@ -1,0 +1,4 @@
+import json
+
+json_f = open('MT.json','R')
+print(json.load(json))
