@@ -121,6 +121,7 @@ class TM(object):
                                         
 if __name__ == '__main__':
     args = sys.argv
+    
     if(args[1] == '-help'):
         print("El programa recibe dos argumentos: un archivo .json donde está especificada la MT y una cadena a procesar")
         sys.exit()
@@ -128,6 +129,7 @@ if __name__ == '__main__':
     if(len(args) > 3):
         print('Sólo se necesitan 2 argumentos; el archivo .json con la descripción de la máquina de Turing y la cadena a procesar')
     else:
+        
         TM = TM(args[1],args[2])
         TM.write_string()
         TM.read_t()
