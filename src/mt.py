@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
-
+sys.setrecursionlimit(150000)
 
 class TM(object):
 
@@ -121,6 +121,7 @@ class TM(object):
                                         
 if __name__ == '__main__':
     args = sys.argv
+    
     
     if(args[1] == '-help'):
         print("El programa recibe dos argumentos: un archivo .json donde está especificada la MT y una cadena a procesar")
