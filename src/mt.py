@@ -52,17 +52,15 @@ class TM(object):
     def read_t(self):
         self.l1 = []
         self.i += 1
-        print(self.l)
         
         for t in self.trans:
             
             if(self.q == t[0] and self.first_sym == t[1]):
-                self.q = t[2]
-                self.first_sym = self.cinta[self.i]
-                self.p_string += t[3]
                 
-
                 if(t[4] == 'R'):
+                    self.q = t[2]
+                    self.first_sym = self.cinta[self.i]
+                    self.p_string += t[3]
                     
                     for sym in self.p_string:
                         self.l1.append(sym)
@@ -74,9 +72,57 @@ class TM(object):
 
                     self.l.append(self.l1)
                     self.a = self.a[1:]
-                    self.read_t()
+                    self.read_t()   
                     
 
+                if(t[4] == 'L'):
+                    
+                    self.q = t[2]
+                    self.cinta = []
+                    self.e = ""
+
+                    self.cinta.append(self.tm['Blanco'])
+                    self.cinta.append(self.tm['Blanco'])
+
+                    for i in range(0,len(self.p_string)-1):
+                        self.l1.append(self.p_string[i])
+                        self.cinta.append(self.p_string[i])
+
+                    self.l1.append(self.q)
+                    self.l1.append(self.p_string[len(self.p_string)-1])
+                    self.cinta.append(self.p_string[len(self.p_string)-1])
+                    self.l1.append(t[3])
+                    self.cinta.append(t[3])
+
+                    for sym in self.a:
+                        self.l1.append(sym)
+                        self.cinta.append(sym)
+                        self.e += sym
+
+                    self.a = ""
+                    self.a += t[3]
+                    self.a += self.e
+                    self.cinta.append(self.tm['Blanco'])
+                    self.cinta.append(self.tm['Blanco'])
+                    self.l.append(self.l1)
+                    self.p_string = self.p_string[:len(self.p_string)-1]
+                    self.first_sym = self.cinta[self.i-2]
+                    self.i -= 2
+                    self.read_t()
+
+                    
+
+                    
+                    
+
+
+
+
+
+
+
+
+                    
 if __name__ == '__main__':
     args = sys.argv
     if(len(args) > 3):
@@ -85,4 +131,4 @@ if __name__ == '__main__':
         TM = TM(args[1],args[2])
         TM.write_string()
         TM.read_t()
-        
+        print(TM.l)
