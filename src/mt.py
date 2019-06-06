@@ -79,7 +79,7 @@ class TM(object):
                     
                     self.q = t[2]
                     self.cinta = []
-                    self.e = ""
+                    e = ""
 
                     self.cinta.append(self.tm['Blanco'])
                     self.cinta.append(self.tm['Blanco'])
@@ -97,11 +97,11 @@ class TM(object):
                     for sym in self.a:
                         self.l1.append(sym)
                         self.cinta.append(sym)
-                        self.e += sym
+                        e += sym
 
                     self.a = ""
                     self.a += t[3]
-                    self.a += self.e
+                    self.a += e
                     self.cinta.append(self.tm['Blanco'])
                     self.cinta.append(self.tm['Blanco'])
                     self.l.append(self.l1)
@@ -110,19 +110,15 @@ class TM(object):
                     self.i -= 2
                     self.read_t()
 
-                    
 
-                    
-                    
+    def check(self):
+        for sym in self.l[len(self.l)-1]:
+            if(sym in self.tm['Finales']):
+                return True
 
-
-
-
-
-
-
-
-                    
+        return False
+        
+                                        
 if __name__ == '__main__':
     args = sys.argv
     if(len(args) > 3):
@@ -131,4 +127,33 @@ if __name__ == '__main__':
         TM = TM(args[1],args[2])
         TM.write_string()
         TM.read_t()
-        print(TM.l)
+
+        l = []
+        s = ""
+        print('Las configuraciones son:')
+        
+        for t in TM.l:
+            
+            for sym in t:
+                
+                if(sym in TM.tm['Estados']):
+                    
+                    s += '|' + sym + "|"
+
+                else:
+                        
+                    s += sym
+                
+            l.append(s)
+            s = ""
+
+        for con in l:
+
+            print("-> " + con)
+
+        if(TM.check()):
+            print("La cadena es aceptada")
+
+        else:
+
+            print("La cadena no es acpetada")
