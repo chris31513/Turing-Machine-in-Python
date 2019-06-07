@@ -82,7 +82,7 @@ class TM(object):
                     e = ""
                     if(self.p_string == ""):
 
-                        self.p_string += "_"
+                        self.p_string += self.tm['Blanco']
                         
                     self.cinta.append(self.tm['Blanco'])
                     self.cinta.append(self.tm['Blanco'])
