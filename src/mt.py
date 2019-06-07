@@ -80,7 +80,10 @@ class TM(object):
                     self.q = t[2]
                     self.cinta = []
                     e = ""
+                    if(self.p_string == ""):
 
+                        self.p_string += "_"
+                        
                     self.cinta.append(self.tm['Blanco'])
                     self.cinta.append(self.tm['Blanco'])
 
