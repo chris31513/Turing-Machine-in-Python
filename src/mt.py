@@ -121,16 +121,24 @@ class TM(object):
 
 
     def check(self):
-        for sym in self.l[len(self.l)-1]:
-            if(sym in self.tm['Finales']):
-                return True
+        for trans in self.l:
+            
+            for sym in trans:
+                
+                if(sym in self.tm['Finales']):
+                    
+                    return True
 
         return False
         
                                         
 if __name__ == '__main__':
     args = sys.argv
-    
+
+    if(len(args) <= 1):
+
+        print("El programa recibe dos argumentos: un archivo .json donde está especificada la MT y una cadena a procesar")
+        sys.exit()
     
     if(args[1] == '-help'):
         print("El programa recibe dos argumentos: un archivo .json donde está especificada la MT y una cadena a procesar")
@@ -168,6 +176,7 @@ if __name__ == '__main__':
             print("-> " + con)
 
         if(TM.check()):
+            
             print("La cadena es aceptada")
 
         else:
