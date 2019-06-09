@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
-sys.setrecursionlimit(150000)
+sys.setrecursionlimit(10**6)
 
 class TM(object):
 
@@ -31,6 +31,7 @@ class TM(object):
         for sym in self.string:
             self.cinta.append(sym)
             
+        self.cinta.append(self.tm['Blanco'])
         self.cinta.append(self.tm['Blanco'])
         self.cinta.append(self.tm['Blanco'])
         self.trans = self.tm['Transiciones']
@@ -83,10 +84,14 @@ class TM(object):
                     if(self.p_string == ""):
 
                         self.p_string += self.tm['Blanco']
-                        
-                    self.cinta.append(self.tm['Blanco'])
-                    self.cinta.append(self.tm['Blanco'])
 
+                    if(self.p_string[0] == "_"):
+                        self.cinta.append(self.tm['Blanco'])
+                    else:
+                        
+                        self.cinta.append(self.tm['Blanco'])
+                        self.cinta.append(self.tm['Blanco'])
+                    
                     for i in range(0,len(self.p_string)-1):
                         self.l1.append(self.p_string[i])
                         self.cinta.append(self.p_string[i])
@@ -97,6 +102,7 @@ class TM(object):
                     self.l1.append(t[3])
                     self.cinta.append(t[3])
 
+                    
                     for sym in self.a:
                         self.l1.append(sym)
                         self.cinta.append(sym)
